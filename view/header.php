@@ -18,7 +18,7 @@ header('Content-Type: text/html; charset=UTF-8');
     <!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="../vendor/jquery-easingy/jquery.min.js"></script> -->
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script> 
+    <!-- <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>  -->
     <script src="../vendor/chart.js/Chart.min.js"></script>
     <script src="../vendor/datatables/jquery.dataTables.js"></script>
     <script src="../vendor/datatables/dataTables.bootstrap4.js"></script> 
@@ -26,6 +26,32 @@ header('Content-Type: text/html; charset=UTF-8');
     <script src="../js/sb-admin-datatables.min.js"></script>
     <script src="../js/sb-admin-charts.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+
+
+
+    <!-- SUM()  Datatables-->
+    <script src="https://cdn.datatables.net/plug-ins/1.10.20/api/sum().js"></script>
+
+    <!-- para exportar documentos -->
+    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+
+    
 
     <style>
         .dropbtn { background-color: #4CAF50; color: white; padding: 0px; font-size: 16px; border: none; cursor: pointer; }
