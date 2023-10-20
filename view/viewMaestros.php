@@ -8,6 +8,8 @@ if (isset($_SESSION['usuario'])) {
     require '../Funciones/funcionalidades.php';
     $Func = new Funciones;
 
+	$mesmaximo = date('Y-m');
+
 	// filtro trimestre
 
 	if (isset($_POST['Filtro'])) {
@@ -189,12 +191,12 @@ if (isset($_SESSION['usuario'])) {
 	    <div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<input id="fecha1" type="month" name="fecha1" class="form-control" value="<?php echo $fecha1?>" required>
+					<input id="fecha1" type="date" name="fecha1" class="form-control" value="<?php echo $fecha1?>"  min='2022-01-01' max='$mesmaximo' required>
 				</div>		
 			</div> 
 			<div class="col-md-4">
 				<div class="form-group">
-					<input id="fecha2" type="month" name="fecha2" class="form-control" value="<?php echo $fecha2?>" required>
+					<input id="fecha2" type="date" name="fecha2" class="form-control" value="<?php echo $fecha2?>" min='2022-01-01' max='$mesmaximo' required>
 				</div>		
 			</div> 	
 			<div class="col">
@@ -256,11 +258,20 @@ if (isset($_SESSION['usuario'])) {
 				<td bgcolor="#198754" align='center'><font color="white"><strong>CATEGORIA</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>SUBTIPO</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>LUGAR</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>Hora Inicio</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>Hora Final</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>Duracion</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>AÑO</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>MES</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>FECHA APLICACION</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>CANTIDAD PROGRAMADOS</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>CANTIDAD ASISTENTES</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>GENERO FEMENINO</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>GENERO MASCULINO</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>BINARIO</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>GENERO</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>CEDULA</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>NOMBRE COMPLETO</strong></font></td>
 			</tr>
 						
 			<?php foreach ($Func->generarExcelProgramaciones($fecha1,$fecha2) as $a){
@@ -275,11 +286,20 @@ if (isset($_SESSION['usuario'])) {
 					<td>".utf8_encode($a['CATEGORIA'])."</td>
 					<td>".utf8_encode($a['SUBTIPO'])."</td>
 					<td>".utf8_decode($a['LUGAR'])."</td>
+					<td>".utf8_decode($a['HINICIO'])."</td>
+					<td>".utf8_decode($a['HFINAL'])."</td>
+					<td>".utf8_decode($a['DURACION'])."</td>
 					<td>".utf8_decode($a['ANIO'])."</td>
 					<td>".utf8_decode($a['MES'])."</td>
 					<td>".utf8_decode($a['FECHAEVENT'])."</td>
 					<td>".utf8_decode($a['CANTIDADPROG'])."</td>
 					<td>".utf8_decode($a['CANTIDADASIS'])."</td>
+					<td>".utf8_decode($a['FEMENINO'])."</td>
+					<td>".utf8_decode($a['MASCULINO'])."</td>
+					<td>0</td>
+					<td>".utf8_decode($a['SEXO'])."</td>
+					<td>".utf8_decode($a['CEDULA'])."</td>
+					<td>".utf8_decode($a['NOMBRE_COMPLETO'])."</td>
 				</tr>";	
 			} ?> 
 		</table>            

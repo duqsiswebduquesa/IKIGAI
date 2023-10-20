@@ -46,7 +46,7 @@ if (isset($_SESSION['usuario'])) {
 							</datalist>
 							</select>
 						</div>
-					</div> 
+					</div>
 
 					<div class="col-md-12 mt-3">
 						<center><input name="VEREMPLEADO" style="width: 100%" class="btn btn-success" type="submit" value="Buscar por empleado" /></center>
@@ -56,35 +56,68 @@ if (isset($_SESSION['usuario'])) {
 		</div>
 	</form>
 
-	<?php if (isset($_GET['VEREMPLEADO'])) : 
-		$CODEMPLEADO =$_GET['codEmpleado'];
+	<?php if (isset($_GET['VEREMPLEADO'])) :
+		$CODEMPLEADO = $_GET['codEmpleado'];
 		$Filtrado = $CODEMPLEADO;
 	?>
 
-	<?php if (count($Func->ListCapCompletas($Filtrado)) !== 0) { ?>
-	<div class="container">
-    	<div class="text-right mt-3">
-			<div class="col-md-12">
-				<table class="table table-bordered" cellspacing="0">
-					<thead>
-						<tr align="center" bgcolor="#198754">	
-							<td><strong><font color="white">ID</strong></font></td> 	
-							<td><strong><font color="white">Año</strong></font></td> 	
-							<td><strong><font color="white">Mes</strong></font></td> 	
-							<td><strong><font color="white">Tipo formacion</strong></font></td>  	
-							<td><strong><font color="white">Cumpl. Legal</strong></font></td> 	
-							<td><strong><font color="white">Capacitación</strong></font></td>  	
-							<td><strong><font color="white">Categoria</strong></font></td>  	
-							<td><strong><font color="white">Subtipo</strong></font></td>  	
-							<td><strong><font color="white">N Personas</strong></font></td>  	
-							<td><strong><font color="white">Costo Total</strong></font></td> 	
-							<td><strong><font color="white">VER</strong></font></td> 	
-						</tr>	
-					</thead>
-					<tbody>
-						<?php
-						foreach ($Func->ListCapCompletas($Filtrado) as $a) {
-							echo "<tr>
+		<?php if (count($Func->ListCapCompletas($Filtrado)) !== 0) { ?>
+			<div class="container">
+				<div class="text-right mt-3">
+					<div class="col-md-12">
+						<table class="table table-bordered" cellspacing="0">
+							<thead>
+								<tr align="center" bgcolor="#198754">
+									<td><strong>
+											<font color="white">ID
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">Año
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">Mes
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">Tipo formacion
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">Cumpl. Legal
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">Capacitación
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">Categoria
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">Subtipo
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">N Personas
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">Costo Total
+										</strong></font>
+									</td>
+									<td><strong>
+											<font color="white">VER
+										</strong></font>
+									</td>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								foreach ($Func->ListCapCompletas($Filtrado) as $a) {
+									echo "<tr>
 								<td align='center'>" . $a['NROPROG'] . "</td>
 								<td align='center'>" . $a['Anio'] . "</td>
 								<td align='center'>" . $a['Mes'] . "</td>
@@ -97,22 +130,22 @@ if (isset($_SESSION['usuario'])) {
 								<td align='center'>$" . number_format($a['PRECIO'], 0, ',', '.') . "</td>
 								<td align='center'>
 									<form action='popup/VerInfoEmpleadoCap.php' target='popup' onsubmit='window.open('popup/VerInfoEmpleadoCap.php', 'popup','width=1600,height=600,scrollbars=no,resizable=no')' method='POST'>
-										<input type='hidden' name='NROPROG' value='".$a['NROPROG']."'>
-										<input type='hidden' name='CODEMPLEADO' value='".$CODEMPLEADO."'>
+										<input type='hidden' name='NROPROG' value='" . $a['NROPROG'] . "'>
+										<input type='hidden' name='CODEMPLEADO' value='" . $CODEMPLEADO . "'>
 										<input name='Download' style='width: 100%'' class='btn btn-success' type='submit' value='VER'/></center>
 									</form>
 								</td>
 							</tr>";
-						}  ?>
-					</tbody>
-				</table>
+								}  ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
 
-	<?php } else { ?>
-		<div class="alert alert-danger mt-5" role="alert" align="center">Este usuario no tiene capacitaciones asignadas o no ha sido calificado</div>
-	<?php } ?>
+		<?php } else { ?>
+			<div class="alert alert-danger mt-5" role="alert" align="center">Este usuario no tiene capacitaciones asignadas o no ha sido calificado</div>
+		<?php } ?>
 
 	<?php endif ?>
 
