@@ -70,7 +70,7 @@ if (isset($_SESSION['usuario'])) {
 									$CONSULTA = "SELECT (V.VALORHORA/60)*DATEDIFF(MINUTE, HINICIO, HFINAL) AS costo FROM PLATCAPACITACIONES.dbo.Capacitaciones cap LEFT JOIN PALMERAS2013.DBO.MTEMPLEA v on v.CODIGO = cap.CODIGOEMPL LEFT JOIN [PLATCAPACITACIONES].[dbo].[CabeceraCap] p on cap.NROPRGC = p.NROPROG WHERE NROPRGC = '$NroProgc' AND CODIGOEMPL = '$CODIGOEMPL'";
 									$resultado = odbc_exec($conexion, $CONSULTA);
 									$COSTO = odbc_result($resultado, 'costo');
-									odbc_exec($conexion, " UPDATE PLATCAPACITACIONES.dbo.Programacion set PRECIO = PRECIO + $COSTO WHERE NROPROG = '$NroProgc'");
+									odbc_exec($conexion, " UPDATE PLATCAPACITACIONES.dbo.Programacion set PRECIO = PRECIO + '$COSTO' WHERE NROPROG = '$NroProgc'");
 									odbc_free_result($Dato); // Libera los recursos de la consulta
 								}
 								echo "<br>";
@@ -78,7 +78,7 @@ if (isset($_SESSION['usuario'])) {
 						}
 							?><script languaje="javascript">
 							window.location = "../view/upcapacitacion.php";
-							alert("¡Se cargo con exito la programación!");
+							alert("¡Se cargo con exito la capacitacion!");
 						</script><?php
 								} else {
 									?><script languaje="javascript">

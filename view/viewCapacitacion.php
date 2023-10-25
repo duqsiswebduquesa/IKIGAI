@@ -62,8 +62,9 @@ $pdf->SetTextColor(9, 198, 32);
 $pdf->Cell(22,5,'CC', 1, 0,'C',0);
 $pdf->Cell(45,5,'NOMBRE', 1, 0,'C',0);
 $pdf->Cell(67,5,'CARGO', 1, 0,'C',0);
+$pdf->Cell(10,5,'SEXO', 1, 0,'C',0);
 $pdf->Cell(10,5,'NOTA', 1, 0,'C',0);
-$pdf->Cell(64,5,'OBSERVACIONES', 1, 1,'C',0);
+$pdf->Cell(54,5,'OBSERVACIONES', 1, 1,'C',0);
 
 $pdf ->SetFontSize(8);
 $pdf->SetTextColor(33, 33, 33);
@@ -79,6 +80,7 @@ foreach ($Func->PartiCapac($NROPROG, $CODEMPLEADO) as $a) {
     $pdf->Cell(22, 7, $a['CEDULA'],1, 0, 'L');
     $pdf->Cell(45, 7, substr($a['NOMBRE'],0 , 30),1, 0, 'L');
     $pdf->Cell(67, 7, $a['CARGO'],1, 0, 'L');
+    $pdf->Cell(10, 7, $a['SEXO'],1, 0, 'L');
 
     if($a['APRUEBA'] < 35.00) {
         $R = 255;
@@ -94,7 +96,7 @@ foreach ($Func->PartiCapac($NROPROG, $CODEMPLEADO) as $a) {
     $pdf->Cell(10, 7, $a['APRUEBA'] !== null ? $a['APRUEBA'] : '0.0',1, 0, 'L');
     
     $pdf->SetTextColor(33, 33, 33);
-    $pdf->Cell(64, 7, $a['Observaciones'],1, 1, 'L');
+    $pdf->Cell(54, 7, $a['Observaciones'],1, 1, 'L');
     $pdf->Ln(0);
 
     $NotaAprueba = $NotaAprueba + $a['APRUEBA'];
@@ -102,8 +104,8 @@ foreach ($Func->PartiCapac($NROPROG, $CODEMPLEADO) as $a) {
 
 $PromPart = $NotaAprueba / count($Func->PartiCapac($NROPROG, $CODEMPLEADO));
 $pdf ->SetFontSize(10);
-$pdf->Cell(134,10,'Promedio: ', 1, 0,'C',0);
+$pdf->Cell(144,10,'Promedio: ', 1, 0,'C',0);
 $pdf->Cell(10,10, number_format(round($PromPart, 1), 1), 1, 0,'C',0);
-$pdf->Cell(64,10,'', 1, 1,'L',0);
+$pdf->Cell(54,10,'', 1, 1,'L',0);
 
 $pdf -> Output();

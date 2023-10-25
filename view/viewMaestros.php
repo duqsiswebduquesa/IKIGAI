@@ -271,6 +271,7 @@ if (isset($_SESSION['usuario'])) {
 				<td bgcolor="#198754" align='center'><font color="white"><strong>BINARIO</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>GENERO</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>CEDULA</strong></font></td>
+				<td bgcolor="#198754" align='center'><font color="white"><strong>NOTA</strong></font></td>
 				<td bgcolor="#198754" align='center'><font color="white"><strong>NOMBRE COMPLETO</strong></font></td>
 			</tr>
 						
@@ -299,6 +300,7 @@ if (isset($_SESSION['usuario'])) {
 					<td>0</td>
 					<td>".utf8_decode($a['SEXO'])."</td>
 					<td>".utf8_decode($a['CEDULA'])."</td>
+					<td>".utf8_decode($a['APRUEBA'])."</td>
 					<td>".utf8_decode($a['NOMBRE_COMPLETO'])."</td>
 				</tr>";	
 			} ?> 

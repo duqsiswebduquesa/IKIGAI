@@ -42,6 +42,8 @@ if (isset($_SESSION['usuario'])) {
 						$objPHPExcel->setActiveSheetIndex(0);
 						$numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
 
+						
+
 						for ($i = 3; $i <= $numRows; $i++) {
 
 
