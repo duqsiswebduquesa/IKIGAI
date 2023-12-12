@@ -44,33 +44,34 @@ header('Content-Type: text/html; charset=UTF-8');
                 <div class="col-md-12">	
                     <table class="table table-bordered" cellspacing="0" id="tablaprueba">	
                         <tr>	
-                            <td colspan="4" align="center"><strong>REGISTRO DE EVALUACION DE LA FORMACION POR EMPLEADO</strong></td>	
+                            <td colspan="5" align="center"><strong>REGISTRO DE EVALUACION DE LA FORMACION POR EMPLEADO</strong></td>	
                             <td>GHA -FT-35<br>Versión: 1<br>Fecha de Emisión: 29/03/2016</td>	
                         </tr>	
                         <tr>	
-                            <td colspan="5"><strong>Tipo de actividad: </strong> <?php echo odbc_result($Func->CabCap($NROPROG), 'CAPACITACION') ?></td>	 
+                            <td colspan="6"><strong>Tipo de actividad: </strong> <?php echo odbc_result($Func->CabCap($NROPROG), 'CAPACITACION') ?></td>	 
                         </tr>	
                         <tr>	
                             <td><strong>Fecha: </strong> <?php echo odbc_result($Func->CabCap($NROPROG), 'FECHA') ?></td>	
                             <td><strong>Hora inicio: </strong><?php echo substr(odbc_result($Func->CabCap($NROPROG), 'HINICIO'), 0, 5) ?></td>	
                             <td><strong>Hora finalizacion: </strong><?php echo substr(odbc_result($Func->CabCap($NROPROG), 'HFINAL'), 0, 5) ?></td>	
-                            <td colspan="2"><strong>Duracion: </strong><?php echo number_format(round(odbc_result($Func->CabCap($NROPROG), 'DURACION'), 2), 2) . " Horas"; ?></td>	
+                            <td colspan="7"><strong>Duracion: </strong><?php echo number_format(round(odbc_result($Func->CabCap($NROPROG), 'DURACION'), 2), 2) . " Horas"; ?></td>	
                         </tr>	
                         <tr>	
                             <td><strong>Lugar: </strong> <?php echo utf8_encode(odbc_result($Func->CabCap($NROPROG), 'LUGAR')) ?> </td>	
-                            <td colspan="4"><strong>Responsable: </strong> <?php echo utf8_decode(odbc_result($Func->CabCap($NROPROG), 'Capacit')) ?> (<strong>Nota: </strong><?php echo utf8_decode(odbc_result($Func->CabCap($NROPROG), 'Nota')) ?>) </td>	
+                            <td colspan="5"><strong>Responsable: </strong> <?php echo utf8_decode(odbc_result($Func->CabCap($NROPROG), 'Capacit')) ?> (<strong>Nota: </strong><?php echo utf8_decode(odbc_result($Func->CabCap($NROPROG), 'Nota')) ?>) </td>	
                         </tr>	
                         <tr>	
-                            <td colspan="2"><strong>Tipo de formacion: </strong> <?php echo utf8_encode(odbc_result($Func->CabCap($NROPROG), 'TFORM')) ?> </td> 	
-                            <td colspan="3"><strong>Bitácora: </strong> <a target="_blank" href="<?php echo odbc_result($Func->CabCap($NROPROG), 'Bitacora') ?>">¡Click para ver!</a></td>	
+                            <td colspan="3"><strong>Tipo de formacion: </strong> <?php echo utf8_encode(odbc_result($Func->CabCap($NROPROG), 'TFORM')) ?> </td> 	
+                            <td colspan="4"><strong>Bitácora: </strong> <a target="_blank" href="<?php echo odbc_result($Func->CabCap($NROPROG), 'Bitacora') ?>">¡Click para ver!</a></td>	
                         </tr>	
                         <tr>	
-                            <td colspan="5"><strong>Descripcion: </strong> <?php echo utf8_encode(odbc_result($Func->CabCap($NROPROG), 'DESCRIPCION')) ?> </td>	
+                            <td colspan="6"><strong>Descripcion: </strong> <?php echo utf8_encode(odbc_result($Func->CabCap($NROPROG), 'DESCRIPCION')) ?> </td>	
                         </tr>	
                         <tr align="center">	
                             <td><strong>NOMBRE</td>	
                             <td><strong>CARGO</strong></td>	
                             <td><strong>CC</strong></td>	
+                            <td><strong>SEXO</strong></td>
                             <td><strong>NOTA</strong></td>	
                             <td><strong>OBSERVACIONES</strong></td>	
                         </tr>	
@@ -96,6 +97,7 @@ header('Content-Type: text/html; charset=UTF-8');
                                 ".$botonEnlace."	
                                 <td>" . utf8_encode($a['CARGO']) . "</td>	
                                 <td align='right'>" . $a['CEDULA'] . "</td>	
+                                <td align='right'>" . $a['SEXO'] . "</td>	
                                 <td align='center'>" . round($a['APRUEBA'], 1) . " " . $icon . "</td>	
                                 <td>" . utf8_encode($a['Observaciones']) . "</td>
                             </tr>";	
@@ -106,7 +108,7 @@ header('Content-Type: text/html; charset=UTF-8');
                             ($PromPart >= 3.5) ? $icon =  "✅" : $icon = '⛔';	
                         ?>	
                         <tr>	
-                            <td colspan="3">Promedio:</td>	
+                            <td colspan="4">Promedio:</td>	
                             <td align="center"><?php echo number_format(round($PromPart, 1), 1) . " " . $icon; ?></td>	
                             <td></td>	
                         </tr>	

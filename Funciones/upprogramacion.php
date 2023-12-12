@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 if (isset($_SESSION['usuario'])) {
 	include '../con_palmerdb.php';
@@ -42,15 +43,10 @@ if (isset($_SESSION['usuario'])) {
 						$objPHPExcel->setActiveSheetIndex(0);
 						$numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
 
-						
+
 
 						for ($i = 3; $i <= $numRows; $i++) {
 
-
-							// PARA LOS TIPOS
-							$TIPOS = $objPHPExcel->getActiveSheet()->getCell('L' . $i)->getCalculatedValue();
-							// PARA LAS CATEGORIAS
-							$CATEG  = $objPHPExcel->getActiveSheet()->getCell('K' . $i)->getCalculatedValue();
 
 							$TFORM = $objPHPExcel->getActiveSheet()->getCell('C' . $i)->getCalculatedValue();
 							$TFORMValue = ($TFORM == "INTERNA") ? 1 : 2;
@@ -63,14 +59,20 @@ if (isset($_SESSION['usuario'])) {
 							$LEGL = $objPHPExcel->getActiveSheet()->getCell('H' . $i)->getCalculatedValue();
 							$LEGLValue = ($LEGL == "SI") ? 1 : 0;
 
-
 							$PROGR  = $objPHPExcel->getActiveSheet()->getCell('I' . $i)->getCalculatedValue();
 							$PASIS  = $objPHPExcel->getActiveSheet()->getCell('J' . $i)->getCalculatedValue();
-							$LINKD  = $objPHPExcel->getActiveSheet()->getCell('M' . $i)->getCalculatedValue();
+							// PARA LAS CATEGORIAS
+							$CATEG  = $objPHPExcel->getActiveSheet()->getCell('K' . $i)->getCalculatedValue();
+							// PARA LOS TIPOS
+							$TIPOS = $objPHPExcel->getActiveSheet()->getCell('M' . $i)->getCalculatedValue();
+
+
+
+							$LINKD  = $objPHPExcel->getActiveSheet()->getCell('N' . $i)->getCalculatedValue();
 
 
 							// PARA LA FECHA
-							$FECHA = $objPHPExcel->getActiveSheet()->getCell('N' . $i)->getCalculatedValue();
+							$FECHA = $objPHPExcel->getActiveSheet()->getCell('P' . $i)->getCalculatedValue();
 							// Convierte el valor de Excel a una fecha en formato UNIX timestamp
 							$fechaUnixTimestamp = PHPExcel_Shared_Date::ExcelToPHP($FECHA);
 							// Luego, formatea la fecha en el formato deseado
@@ -78,8 +80,8 @@ if (isset($_SESSION['usuario'])) {
 							// echo "Valor de FECHA antes de la conversión: $fechaFormateada";
 
 							// PARA LAS HORAS
-							$HINICIO = $objPHPExcel->getActiveSheet()->getCell('O' . $i)->getCalculatedValue();
-							$HFINALI = $objPHPExcel->getActiveSheet()->getCell('P' . $i)->getCalculatedValue();
+							$HINICIO = $objPHPExcel->getActiveSheet()->getCell('Q' . $i)->getCalculatedValue();
+							$HFINALI = $objPHPExcel->getActiveSheet()->getCell('R' . $i)->getCalculatedValue();
 
 							// Convierte el valor de Excel a una hora en formato UNIX timestamp
 							$horaInicioUnixTimestamp = PHPExcel_Shared_Date::ExcelToPHP($HINICIO);
@@ -96,11 +98,11 @@ if (isset($_SESSION['usuario'])) {
 							// echo "Hora inicio: $horaInicioFormateada";
 							// echo "Hora final: $horaFinalFormateada";
 
-							$DESCRIP  = $objPHPExcel->getActiveSheet()->getCell('Q' . $i)->getCalculatedValue();
-							$LUGAR  = $objPHPExcel->getActiveSheet()->getCell('R' . $i)->getCalculatedValue();
+							$DESCRIP  = $objPHPExcel->getActiveSheet()->getCell('S' . $i)->getCalculatedValue();
+							$LUGAR  = $objPHPExcel->getActiveSheet()->getCell('T' . $i)->getCalculatedValue();
 
 
-							if ($TFORM != NULL && $CAPAC != NULL) {
+							if ($TFORMValue != NULL and $CAPAC != NULL) {
 								$QryPrg = "INSERT INTO PLATCAPACITACIONES.dbo.Programacion (ID, NROPROG, TFORM, CAPACITACION, CAPACITADOR, ANIO, MES, USUARIO, FECCARGA, ESTADO, PRECIO, CANTIDADASIS, CUMPLEGAL, CATEGORIA, SUBTIPO, CANTIDADPROG, FECHA )
 								VALUES ('$Ser', '$NroProg', '$TFORMValue', '$CAPAC', '$CADOR', '$ANIO', '$MES', '$usu', GETDATE(), 1, 0, '$PASIS', '$LEGLValue', '$CATEG', '$TIPOS', $PROGR, '$fechaFormateada')";
 								$Dato = odbc_exec($conexion, $QryPrg);
@@ -111,46 +113,53 @@ if (isset($_SESSION['usuario'])) {
 							}
 
 							// Utiliza la misma variable $NroProg en el segundo INSERT
-							$QryPrg2 = "INSERT INTO PLATCAPACITACIONES.dbo.CabeceraCap (NROPROG, FECHA, HINICIO, HFINAL, LUGAR, DESCRIPCION, USUARIO, FECACT)
-							VALUES ('$NroProg', '$fechaFormateada', '$horaInicioFormateada', '$horaFinalFormateada', '$LUGAR', '$DESCRIP', '$usu', GETDATE())";
-							$Dato2 = odbc_exec($conexion, $QryPrg2);
-							
-							$NroProg++;
-							
+							if ($TFORMValue != NULL and $CAPAC != NULL) {
+								$QryPrg2 = "INSERT INTO PLATCAPACITACIONES.dbo.CabeceraCap (NROPROG, FECHA, HINICIO, HFINAL, LUGAR, DESCRIPCION, USUARIO, FECACT)
+								VALUES ('$NroProg', '$fechaFormateada', '$horaInicioFormateada', '$horaFinalFormateada', '$LUGAR', '$DESCRIP', '$usu', GETDATE())";
+								$Dato2 = odbc_exec($conexion, $QryPrg2);
+								$NroProg++;
+								if ($Dato2) {
+									odbc_free_result($Dato2); // Libera los recursos de la consulta
+									?>
+												<script languaje="javascript">
+													window.location = "../view/upinformacion.php";
+													alert("¡Se cargo con exito la programación!");
+												</script>
+									<?php
+								}
+							}
 						}
 
 
-									?><script languaje="javascript">
-									window.location = "../view/upinformacion.php";
-									alert("¡Se cargo con exito la programación!");
-									</script><?php
-										} else {
-											?><script languaje="javascript">
-									window.location = "../view/upinformacion.php";
-									alert("¡Hubo un error!");
-								</script><?php
-										}
-									} else {
-											?><script languaje="javascript">
-								window.location = "../view/upinformacion.php";
-								alert("¡Hubo un error!");
-							</script><?php
-									}
-								} else {
-										?><script languaje="javascript">
+						?><script languaje="javascript">
 							window.location = "../view/upinformacion.php";
-							alert("¡Por favor, suba un archivo valido (Excel)!");
-							</script><?php
+							alert("¡Se cargo con exito la programación!");
+						</script><?php
+								} else {
+									?><script languaje="javascript">
+							window.location = "../view/upinformacion.php";
+							alert("¡Hubo un error!");
+						</script><?php
 								}
-							} // Cierre de las validaciones 0	
+							} else {
+									?><script languaje="javascript">
+						window.location = "../view/upinformacion.php";
+						alert("¡Hubo un error!");
+					</script><?php
+							}
+						} else {
+								?><script languaje="javascript">
+					window.location = "../view/upinformacion.php";
+					alert("¡Por favor, suba un archivo valido (Excel)!");
+				</script><?php
+						}
+					} // Cierre de las validaciones 0	
 				}
-	
 			} else {
-						?>
-							<script languaje "JavaScript">
-								alert("Acceso Incorrecto");
-								window.location.href = "../login.php";
-							</script>
-						<?php
-					} // Cierre de Validacion de Inicio de sesion	
-				
+							?>
+	<script languaje "JavaScript">
+		alert("Acceso Incorrecto");
+		window.location.href = "../login.php";
+	</script>
+<?php
+			} // Cierre de Validacion de Inicio de sesion	
