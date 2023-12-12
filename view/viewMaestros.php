@@ -92,37 +92,43 @@ if (isset($_SESSION['usuario'])) {
 </div> 
 
 <form method="POST">
-	<div class="container">
-	    <div class="text-right mt-3">
-	    	<div class="row">
-	    		<div class="col-md-3" align="center">Seleccione el trimestre</div>
+    <div class="container">
+        <div class="text-right mt-3">
+            <div class="row">
+                <div class="col-md-3" align="center">Seleccione el trimestre</div>
 
-	    		<div class="col-md-3">
-	    			<div class="form-group">
-	            		<select list="Anio" class="form-control" type="text" name="Anio" required>
-	                    <?php for ($i=2022; $i <= Date("Y"); $i++) { 
-	                        echo '<option value="'.$i.'">'.$i.'</option>'; 
-	                    } ?>
-	                	</select>
-	                </div> 
-	    		</div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select list="Anio" class="form-control" type="text" name="Anio" required>
+                            <?php
+                            for ($i = 2022; $i <= Date("Y"); $i++) {
+                                $selected = ($i == $Anio) ? 'selected' : '';
+                                echo '<option value="' . $i . '" ' . $selected . '>' . $i . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
 
-	    		<div class="col-md-4">
-	    			<select list="Trimestre" class="form-control" name="Trimestre" required>
-	                 	<option></option> 
-	                 	<option value="1">Primer trimestre</option> 
-	                 	<option value="2">Segundo trimestre</option> 
-	                 	<option value="3">Tercer trimestre</option> 
-	                 	<option value="4">Cuarto trimestre</option> 
-	            	</select>
-	    		</div>
+                <div class="col-md-4">
+                    <select list="Trimestre" class="form-control" name="Trimestre" required>
+                        <option></option>
+                        <?php
+                        $trimestres = ['Primer trimestre', 'Segundo trimestre', 'Tercer trimestre', 'Cuarto trimestre'];
+                        for ($i = 1; $i <= 4; $i++) {
+                            $selected = ($i == $TriActual) ? 'selected' : '';
+                            echo '<option value="' . $i . '" ' . $selected . '>' . $trimestres[$i - 1] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
 
-	    		<div class="col-md-2">
-                	<center><input name="Filtro" style="width: 100%" class="btn btn-success" type="submit" value="Filtrar"/></center>
-	    		</div>
-	    	</div>
-		</div>
-	</div>
+                <div class="col-md-2">
+                    <center><input name="Filtro" style="width: 100%" class="btn btn-success" type="submit" value="Filtrar" /></center>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 <div class="container">
     <div class="text-right mt-3">

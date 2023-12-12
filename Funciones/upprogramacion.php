@@ -49,49 +49,8 @@ if (isset($_SESSION['usuario'])) {
 
 							// PARA LOS TIPOS
 							$TIPOS = $objPHPExcel->getActiveSheet()->getCell('L' . $i)->getCalculatedValue();
-							$tiposMapping = array(
-								"CHARLAS" => 11,
-								"BIENESTAR" => 12,
-								"REUNION" => 19,
-								"REINDUCCION" => 22,
-								"NOTIFICACION" => 20,
-								"INDUCCION" => 21,
-								"CAPACITACION" => 10,
-								"ENTRENAMIENTO" => 18
-							);
-
-							if (array_key_exists($TIPOS, $tiposMapping)) {
-								$TIPOSValue = $tiposMapping[$TIPOS];
-							} else {
-								$TIPOSValue = 0;
-							}
-
 							// PARA LAS CATEGORIAS
 							$CATEG  = $objPHPExcel->getActiveSheet()->getCell('K' . $i)->getCalculatedValue();
-							$categMapping = array(
-
-								"AMBIENTAL" => 2,
-								"CALIDAD" => 3,
-								"FINANCIERA" => 5,
-								"PROCESOS ADMINISTRATIVOS" => 8,
-								"PROCESOS AGRONOMICOS" => 6,
-								"PROCESOS INDUSTRIALES" => 7,
-								"SEGURIDAD Y SALUD LABORAL" => 1,
-								"TALENTO HUMANA" => 4,
-								"RSPO" => 9,
-								"OTROS" => 14,
-								"TALLER AGRICOLA" => 17,
-								"GESTION AMBIENTAL" => 23,
-								"GESTION DE CALIDAD" => 24,
-								"SSL" => 25,
-								"SSL Y TALENTO HUMANO" => 26
-							);
-
-							if (array_key_exists($CATEG, $categMapping)) {
-								$CATEGValue = $categMapping[$CATEG];
-							} else {
-								$CATEGValue = 0;
-							}
 
 							$TFORM = $objPHPExcel->getActiveSheet()->getCell('C' . $i)->getCalculatedValue();
 							$TFORMValue = ($TFORM == "INTERNA") ? 1 : 2;
@@ -137,31 +96,19 @@ if (isset($_SESSION['usuario'])) {
 							// echo "Hora inicio: $horaInicioFormateada";
 							// echo "Hora final: $horaFinalFormateada";
 
-
-
 							$DESCRIP  = $objPHPExcel->getActiveSheet()->getCell('Q' . $i)->getCalculatedValue();
 							$LUGAR  = $objPHPExcel->getActiveSheet()->getCell('R' . $i)->getCalculatedValue();
 
+
 							if ($TFORM != NULL && $CAPAC != NULL) {
 								$QryPrg = "INSERT INTO PLATCAPACITACIONES.dbo.Programacion (ID, NROPROG, TFORM, CAPACITACION, CAPACITADOR, ANIO, MES, USUARIO, FECCARGA, ESTADO, PRECIO, CANTIDADASIS, CUMPLEGAL, CATEGORIA, SUBTIPO, CANTIDADPROG, FECHA )
-								VALUES ('$Ser', '$NroProg', '$TFORMValue', '$CAPAC', '$CADOR', '$ANIO', '$MES', '$usu', GETDATE(), 0, 0, '$PASIS', '$LEGLValue', '$CATEGValue', '$TIPOSValue', $PROGR, '$fechaFormateada')";
+								VALUES ('$Ser', '$NroProg', '$TFORMValue', '$CAPAC', '$CADOR', '$ANIO', '$MES', '$usu', GETDATE(), 1, 0, '$PASIS', '$LEGLValue', '$CATEG', '$TIPOS', $PROGR, '$fechaFormateada')";
 								$Dato = odbc_exec($conexion, $QryPrg);
 
 								if ($Dato) {
 									odbc_free_result($Dato); // Libera los recursos de la consulta
 								}
 							}
-
-							// if ($TFORM != NULL && $CAPAC != NULL) {
-							// 	$QryPrg = "INSERT INTO PLATCAPACITACIONES.dbo.Programacion (ID, NROPROG, TFORM, CAPACITACION, CAPACITADOR, ANIO, MES, USUARIO, FECCARGA, ESTADO, PRECIO, CANTIDADASIS, CUMPLEGAL, CATEGORIA, SUBTIPO, CANTIDADPROG, FECHA )
-							// 	VALUES ('$Ser', '$NroProg', '$TFORMValue', '$CAPAC', '$CADOR', '$ANIO', '$MES', '$usu', GETDATE(), 0, 0, '$PASIS', '$LEGLValue', '$CATEGValue', '$TIPOSValue', $PROGR, '$fechaFormateada')
-							// 	UPDATE PLATCAPACITACIONES.dbo.Programacion SET FECHA = CONVERT(VARCHAR,CONCAT(ANIO,'-',MES,'-01'),23) WHERE NROPROG = '$NroProg'";
-							// 	$Dato = odbc_exec($conexion, $QryPrg);
-
-							// 	if ($Dato) {
-							// 		odbc_free_result($Dato); // Libera los recursos de la consulta
-							// 	}
-							// }
 
 							// Utiliza la misma variable $NroProg en el segundo INSERT
 							$QryPrg2 = "INSERT INTO PLATCAPACITACIONES.dbo.CabeceraCap (NROPROG, FECHA, HINICIO, HFINAL, LUGAR, DESCRIPCION, USUARIO, FECACT)

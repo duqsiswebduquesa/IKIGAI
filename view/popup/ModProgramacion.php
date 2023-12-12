@@ -276,8 +276,8 @@ $count = 1;
 							<input type="hidden" id="cantidadAsisHidden" name="CANTPROGRAMADOSHidden" value="<?php echo odbc_result($ConsMod, 'CANTIDADPROG') ?>">
 							<input type="hidden" id="linkDriveHidden" name="LinkDriveHidden" value="<?php echo odbc_result($ConsMod, 'Bitacora') ?>">
 
-							<input type="hidden" id="categoriaHidden" name="CategoriaHidden" value="<?php echo odbc_result($ConsMod, 'ID2'); ?>">
-							<input type="hidden" id="temaHidden" name="TemaHidden" value="<?php echo odbc_result($ConsMod, 'ID1'); ?>">
+							<input type="text" id="categoriaHidden" name="CategoriaHidden" value="<?php echo odbc_result($ConsMod, 'ID2'); ?>">
+							<input type="text" id="temaHidden" name="TemaHidden" value="<?php echo odbc_result($ConsMod, 'ID1'); ?>">
 
 
 						</div>

@@ -38,7 +38,7 @@ if (isset($_SESSION['usuario'])) {
 
 					<div class="col-md-10">
 						<div class="form-group">
-							<input type="text" name="codEmpleado" list="listaEmpl" style="width: 100%; padding: 4px;" placeholder="Busca un empleado">
+							<input type="text" name="codEmpleado" list="listaEmpl" style="width: 100%; padding: 4px;" placeholder="Busca un empleado" autocomplete="off">
 							<datalist id="listaEmpl">
 								<?php foreach ($Func->ListTodosEmpl() as $a) {
 									echo '<option value="' . $a['CODIGO'] . '">' . $a['NOMBRE'] . '</option>';

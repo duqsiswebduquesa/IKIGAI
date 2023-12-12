@@ -102,8 +102,8 @@ class Funciones {
 
 	public function ListTodosEmpl(){
 		include "con_palmerdb.php"; 
-		$Da = "SELECT CONCAT(RTRIM(CODIGO),' - ', RTRIM(NOMBRE), ' ', RTRIM(NOMBRE2), ' ', RTRIM(APELLIDO), ' ', RTRIM(APELLIDO2)) AS NOMBRE, CODIGO
-		FROM PALMERAS2013..MTEMPLEA WHERE CONVERT(VARCHAR, FECRETIRO, 23) = '2100-12-31'";
+		$Da = "SELECT CONCAT(RTRIM(CEDULA),' - ', RTRIM(NOMBRE), ' ', RTRIM(NOMBRE2), ' ', RTRIM(APELLIDO), ' ', RTRIM(APELLIDO2)) AS NOMBRE, CEDULA
+		FROM PALMERAS2013..MTEMPLEA WHERE CONVERT(VARCHAR, FECRETIRO, 23) = '2100-12-31' ";
 		$Dat = odbc_exec($conexion, $Da);
 		while ($Dos = odbc_fetch_array($Dat)) { $arr[] = $Dos; }
 		return $arr;

@@ -29,6 +29,10 @@ if (isset($_SESSION['usuario'])) {
         </div>
     </div>
 
+
+
+
+
     <form action="" method="POST">
         <div class="container">
             <div class="text-right mt-1">
@@ -178,6 +182,33 @@ if (isset($_SESSION['usuario'])) {
                     <h3 align="center">Subir Capacitación</h3>
                 </div>
 
+
+                <div class="col-md-12">
+                    <hr>
+                    <?php
+                    include '../con_palmerdb.php';
+                    $Serial = "SELECT TOP (1) NROPRGC FROM [PLATCAPACITACIONES].[dbo].[Capacitaciones] order by NROPRGC desc";
+                    $resultado = odbc_exec($conexion, $Serial);
+
+                    // Comprueba si la consulta fue exitosa
+                    if ($resultado) {
+                        // Obtiene los datos como un array asociativo
+                        $fila = odbc_fetch_array($resultado);
+
+                        // Imprime el valor de NROPROG
+                        if ($fila) {
+                            echo  " <strong> Último ID Capacitación: <strong> " . $fila['NROPRGC'];
+                        } else {
+                            echo "No se encontraron resultados";
+                        }
+                    } else {
+                        echo "Error en la consulta SQL";
+                    }
+                    ?>
+
+                    <br>
+                </div>
+
                 <div class="col-md-12">
                     <hr>
                     <br>
@@ -204,7 +235,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="col-md-12">
                     <div class="mb-3">
                         <h4 align="center"><label class="form-label">¡Descargar Maqueta!</label></h4>
-                        <form method="get" action="../Maqueta/Maqueta programacion - Final.xlsx">
+                        <form method="get" action="../Maqueta/PLANTILLA - MAESTROS-IKIGAI .xlsx">
                             <center><button style="width: 100%" class="btn btn-primary" type="submit">¡Descarga la maqueta aquí!</button></center>
                         </form>
                     </div>
