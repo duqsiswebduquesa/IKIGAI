@@ -69,8 +69,8 @@ if (isset($_SESSION['usuario'])) {
       <div class="row">
         <div class="col-md-12"><br></div>
 
-        
-               <!-- se corriguen los campos de fechas año y mes , cuand ose haga la consulta los datos queden alli  -->
+
+        <!-- se corriguen los campos de fechas año y mes , cuand ose haga la consulta los datos queden alli  -->
         <div class="col-md-1" align="right">
           <div class="form-group">
             <label>Año <font color="red"><strong>*</strong></font> </label>
@@ -134,8 +134,17 @@ if (isset($_SESSION['usuario'])) {
 
       <div class="col-md-3">
         <div class="card text-white bg-success mb-3" style="max-width: 100%;">
+          <div class="card-header" align="center">Cumplimiento</div>
+          <div class="card-body">Se agenda <strong><?php echo round($NroProg, 0) ?></strong> encuentros, de los cuales <strong><?php echo round($NroPLlv, 0) ?></strong> se llevaron a cabo. Obteniendo un <strong><?php echo round($Cobertura, 0) ?>%</strong> de cumplimiento.
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card text-white bg-success mb-3" style="max-width: 100%;">
           <div class="card-header" align="center">Cobertura</div>
-          <div class="card-body">Se programo un total de <strong><?php echo round($Programados, 0) ?></strong> personas, asistiendo en él <strong><?php echo round($Asistidos, 0) ?></strong>, para una cobertura de <strong><?php echo round($Cobertura, 0) ?>%.</strong>
+          <div class="card-body">Personas programadas: <strong><?php echo round($Programados, 0) ?><br></strong> Personas que asistieron: <strong><?php echo round($Asistidos, 0) ?></strong>, para una cobertura de <strong><?php echo round($Cobertura, 0) ?>%.</strong>
           </div>
         </div>
       </div>
@@ -144,14 +153,6 @@ if (isset($_SESSION['usuario'])) {
         <div class="card text-white bg-success mb-3" style="max-width: 100%;">
           <div class="card-header" align="center">Eficacia</div>
           <div class="card-body">La capacitacion tuvo un total de <strong><?php echo $Eficacia ?> </strong> personas aprobadas, significando un <strong><?php echo round($porEficacia, 0) ?>%</strong> de eficacia
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card text-white bg-success mb-3" style="max-width: 100%;">
-          <div class="card-header" align="center">Cumplimiento</div>
-          <div class="card-body">Se agenda <strong><?php echo round($NroProg, 0) ?></strong> encuentros, de los cuales <strong><?php echo round($NroPLlv, 0) ?></strong> se llevaron a cabo. Obteniendo un <strong><?php echo round($Cobertura, 0) ?>%</strong> de cumplimiento.
           </div>
         </div>
       </div>

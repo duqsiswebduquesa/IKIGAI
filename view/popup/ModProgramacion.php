@@ -90,7 +90,7 @@ $count = 1;
 
 					<div class="col-md-3">
 						<div class="form-group">
-							<input id="input1" name="Anio" class="form-control saveInputs" type="text" value="<?php echo odbc_result($ConsMod, 'Anio') ?>" required>
+							<input id="input1" name="Anio" class="form-control saveInputs" type="text" value="<?php echo odbc_result($ConsMod, 'Anio') ?>" readonly required>
 						</div>
 					</div>
 
@@ -102,7 +102,7 @@ $count = 1;
 
 					<div class="col-md-3">
 						<div class="form-group">
-							<input id="input2" name="Mes" class="form-control saveInputs" type="text" value="<?php echo odbc_result($ConsMod, 'Mes') ?>" required>
+							<input id="input2" name="Mes" class="form-control saveInputs" type="text" value="<?php echo odbc_result($ConsMod, 'Mes') ?>" readonly required>
 						</div>
 					</div>
 
@@ -118,7 +118,7 @@ $count = 1;
 
 					<div class="col-md-9">
 						<div class="form-group">
-							<input id="input3" name="Capacitacion" class="form-control saveInputs" type="text" value="<?php echo odbc_result($ConsMod, 'CAPACITACION') ?>" required>
+							<input id="input3" name="Capacitacion" class="form-control saveInputs" type="text" value="<?php echo odbc_result($ConsMod, 'CAPACITACION') ?>" readonly required>
 						</div>
 					</div>
 
@@ -134,7 +134,7 @@ $count = 1;
 
 					<div class="col-md-3">
 						<div class="form-group">
-							<input id="input4" name="CAPACITADOR" class="form-control saveInputs" type="number" value="<?php echo odbc_result($ConsMod, 'CAPACITADOR') ?>" required>
+							<input id="input4" name="CAPACITADOR" class="form-control saveInputs" type="number" value="<?php echo odbc_result($ConsMod, 'CAPACITADOR') ?>" readonly required>
 						</div>
 					</div>
 
@@ -147,7 +147,7 @@ $count = 1;
 					<!-- asistentes programados -->
 					<div class="col-md-3">
 						<div class="form-group">
-							<input id="cantidadAsis" name="CANTPROGRAMADOS" class="form-control saveInputs" type="number" value="<?php echo odbc_result($ConsMod, 'CANTIDADPROG') ?>">
+							<input id="cantidadAsis" name="CANTPROGRAMADOS" class="form-control saveInputs" type="number" value="<?php echo odbc_result($ConsMod, 'CANTIDADPROG') ?>" readonly required>
 						</div>
 					</div>
 
@@ -276,8 +276,8 @@ $count = 1;
 							<input type="hidden" id="cantidadAsisHidden" name="CANTPROGRAMADOSHidden" value="<?php echo odbc_result($ConsMod, 'CANTIDADPROG') ?>">
 							<input type="hidden" id="linkDriveHidden" name="LinkDriveHidden" value="<?php echo odbc_result($ConsMod, 'Bitacora') ?>">
 
-							<input type="text" id="categoriaHidden" name="CategoriaHidden" value="<?php echo odbc_result($ConsMod, 'ID2'); ?>">
-							<input type="text" id="temaHidden" name="TemaHidden" value="<?php echo odbc_result($ConsMod, 'ID1'); ?>">
+							<input type="hidden" id="categoriaHidden" name="CategoriaHidden" value="<?php echo odbc_result($ConsMod, 'ID2'); ?>">
+							<input type="hidden" id="temaHidden" name="TemaHidden" value="<?php echo odbc_result($ConsMod, 'ID1'); ?>">
 
 
 						</div>
@@ -518,6 +518,7 @@ $count = 1;
 		});
 	});
 </script>
+
 
 <!-- script de suma -->
 <script>

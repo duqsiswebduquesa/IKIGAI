@@ -41,7 +41,7 @@ if (isset($_SESSION['usuario'])) {
 							<input type="text" name="codEmpleado" list="listaEmpl" style="width: 100%; padding: 4px;" placeholder="Busca un empleado">
 							<datalist id="listaEmpl">
 								<?php foreach ($Func->ListTodosEmpl() as $a) {
-									echo '<option value="' . $a['CODIGO'] . '">' . $a['NOMBRE'] . '</option>';
+									echo '<option value="' . $a['CEDULA'] . '">' . $a['NOMBRE'] . '</option>';
 								} ?>
 							</datalist>
 							</select>

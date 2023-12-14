@@ -62,7 +62,7 @@ if (isset($_SESSION['usuario'])) {
 								$QryPrg = "INSERT INTO PLATCAPACITACIONES.dbo.Capacitaciones
 								( NROPRGC, CODIGOEMPL, APRUEBA, Observaciones, FECCARGA, USUARIO, TIPOUSUARIO, ASISTENCIA )
 								VALUES 
-								( '$NroProgc', '$CODIGOEMPL', '$APRUEBA', '$Observaciones', GETDATE(), '$usu', '$TIPOUSUARIOValue', '$ASISTENCIAValue' )";
+								( '$NroProgc', '$CODIGOEMPL', '$APRUEBA'*10, '$Observaciones', GETDATE(), '$usu', '$TIPOUSUARIOValue', '$ASISTENCIAValue' )";
 
 								$Dato = odbc_exec($conexion, $QryPrg);
 								if ($Dato) {

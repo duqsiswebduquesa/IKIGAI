@@ -122,7 +122,7 @@ class Funciones
 	public function ListTodosEmpl()
 	{
 		include "con_palmerdb.php";
-		$Da = "SELECT CONCAT(RTRIM(CEDULA),' - ', RTRIM(NOMBRE), ' ', RTRIM(NOMBRE2), ' ', RTRIM(APELLIDO), ' ', RTRIM(APELLIDO2)) AS NOMBRE, CEDULA,CODIGO
+		$Da = "SELECT CONCAT(RTRIM(CEDULA),' - ', RTRIM(NOMBRE), ' ', RTRIM(NOMBRE2), ' ', RTRIM(APELLIDO), ' ', RTRIM(APELLIDO2)) AS NOMBRE, CEDULA
 		FROM PALMERAS2013..MTEMPLEA WHERE CONVERT(VARCHAR, FECRETIRO, 23) = '2100-12-31'";
 		$Dat = odbc_exec($conexion, $Da);
 		while ($Dos = odbc_fetch_array($Dat)) {
@@ -209,7 +209,7 @@ class Funciones
 		INNER JOIN PALMERAS2013.dbo.MTEMPLEA M ON M.CODIGO = C.CODIGOEMPL 
 		LEFT JOIN PLATCAPACITACIONES..OpcionesProgramacion TP1 ON TP1.ID = P.CATEGORIA 
 		LEFT JOIN PLATCAPACITACIONES..OpcionesProgramacion TP2 ON TP2.ID = P.SUBTIPO WHERE M.CODIGO LIKE '$Filtrado%' 
-		GROUP BY TP1.OPCION, TP2.OPCION, P.NROPROG, P.TFORM, P.CumpLegal, P.CAPACITACION, P.PRECIO, P.CANTIDADASIS, P.CAPACITADOR, L.Nota, P.Anio, P.Mes";
+		GROUP BY TP1.OPCION, TP2.OPCION, P.NROPROG, P.TFORM, P.CumpLegal, P.CAPACITACION, P.PRECIO, P.CANTIDADASIS, P.CAPACITADOR, L.Nota, P.Anio, P.Mes order by P.Anio ASC ";
 
 		$Dat = odbc_exec($conexion, $Da);
 		while ($Dos = odbc_fetch_array($Dat)) {

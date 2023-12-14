@@ -121,7 +121,7 @@ if (isset($_SESSION['usuario'])) {
 					<div class="col-md-3">
 						<label>Centro de Costo</label>
 						<div class="form-group">
-							<select list="Mes" class="form-control" type="text" name="Costo" id="centroCosto" required>
+							<select list="Mes" class="form-control" type="text" name="Costo" id="centroCosto" >
 								<?php
 								// Verificar si no se ha enviado el formulario o si no se ha seleccionado un valor para el campo "Costo"
 								$selectedOption = (empty($_GET['Costo'])) ? 'selected' : '';
@@ -141,7 +141,7 @@ if (isset($_SESSION['usuario'])) {
 					<div class="col-md-4">
 						<label>Cargo</label>
 						<div class="form-group">
-							<select list="Mes" class="form-control" type="text" name="Cargo" id="campoCargo" required>
+							<select list="Mes" class="form-control" type="text" name="Cargo" id="campoCargo" >
 								<option value="">Seleccione el Cargo</option>
 								<?php
 								foreach ($Func->ListCargo($COSTOCC) as $a) {
